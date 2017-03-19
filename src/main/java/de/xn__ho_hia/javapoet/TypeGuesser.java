@@ -54,7 +54,7 @@ public final class TypeGuesser {
         }
     }
 
-    private static TypeName guessType(final String type) {
+    static TypeName guessType(final String type) {
         switch (type) {
             case "boolean":
                 return TypeName.BOOLEAN;
