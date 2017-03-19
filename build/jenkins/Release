@@ -41,6 +41,7 @@ node {
                 sh """
                     mvn --batch-mode \
                         --show-version \
+                        --activate-profiles online \
                         install
                 """
                 sh """
