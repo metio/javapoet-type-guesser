@@ -7,6 +7,7 @@
 package de.xn__ho_hia.javapoet;
 
 import java.lang.reflect.Constructor;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
@@ -76,6 +77,23 @@ class TypeGuesserTest {
                 .map(genericType -> DynamicTest.dynamicTest(String.format("should throw for: %s", genericType),
                         () -> Assertions.assertThrows(IllegalArgumentException.class,
                                 () -> TypeGuesser.guessTypeName(genericType))));
+    }
+
+    @TestFactory
+    Stream<DynamicTest> shouldIgnoreWhitespace() {
+        return Stream.of(
+                new SimpleEntry<>(" java.lang.Object[] ", "java.lang.Object[]"),
+                new SimpleEntry<>(" java.lang.Object [] ", "java.lang.Object[]"),
+                new SimpleEntry<>(" java.util.List<java.lang.Object> ", "java.util.List<java.lang.Object>"),
+                new SimpleEntry<>(" java.util.List< java.lang.Object > ", "java.util.List<java.lang.Object>"),
+                new SimpleEntry<>(" java.util.List< ? > ", "java.util.List<?>"),
+                new SimpleEntry<>(" java.util.List <java.lang.Object> ", "java.util.List<java.lang.Object>"),
+                new SimpleEntry<>(" java.util.List < java.lang.Object > ", "java.util.List<java.lang.Object>"),
+                new SimpleEntry<>(" java.util.List < ? > ", "java.util.List<?>"))
+                .map(entry -> DynamicTest.dynamicTest(
+                        String.format("should parse [ %s ] as: %s", entry.getKey(), entry.getValue()),
+                        () -> Assertions.assertEquals(entry.getValue(),
+                                TypeGuesser.guessTypeName(entry.getKey()).toString())));
     }
 
     @Test

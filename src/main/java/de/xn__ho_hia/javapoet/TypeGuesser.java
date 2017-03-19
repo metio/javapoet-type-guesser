@@ -109,7 +109,7 @@ public final class TypeGuesser {
     }
 
     private static TypeName guessGenericType(final String type) {
-        final String rawPart = type.substring(0, type.indexOf(OPEN_ANGLE_BRACKET));
+        final String rawPart = type.substring(0, type.indexOf(OPEN_ANGLE_BRACKET)).trim();
         final String genericPart = type.substring(type.indexOf(OPEN_ANGLE_BRACKET) + 1,
                 type.lastIndexOf(CLOSING_ANGLE_BRACKET));
         final ClassName rawType = ClassName.bestGuess(rawPart);
