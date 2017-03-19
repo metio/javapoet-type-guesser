@@ -57,7 +57,7 @@ To use this project just declare the following dependency inside your POM:
 </dependency>
 ----
 
-Replace `${version.javapoet-type-guesser}` with the link:++http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.javapoet%20a%3Ajavapoet-type-guesser++[latest release]. This project is continuously deployed and uses a date based versioning approach. I vow not to break any of its API every, thus it is safe to use an open version range like this `(1.0.0,)` as a replacement for `${version.javapoet-type-guesser}`.
+Replace `${version.javapoet-type-guesser}` with the link:++http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.javapoet%20a%3Ajavapoet-type-guesser++[latest release]. This project is continuously deployed and uses a date based versioning approach. I vow not to break any of its API ever, thus it is safe to use an open version range like this `(1.0.0,)` as a replacement for `${version.javapoet-type-guesser}`.
 
 === Compatibility
 

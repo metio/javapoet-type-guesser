@@ -10,6 +10,8 @@ import java.lang.reflect.Constructor;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.stream.Stream;
 
+import com.squareup.javapoet.ClassName;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.Test;
@@ -73,6 +75,7 @@ class TypeGuesserTest {
         return Stream.of(
                 "java.lang.Object[]]",
                 "java.util.List<java.lang.Object",
+                "java.util.List<int>",
                 "java.util.List<java.util.List<java.lang.Object>",
                 "java.util.List<java.util.List<java.util.List<java.lang.Object>>",
                 "java.util.List<? extends java.util.List<? super int>>",
@@ -98,6 +101,44 @@ class TypeGuesserTest {
                         String.format("should parse [ %s ] as: %s", entry.getKey(), entry.getValue()),
                         () -> Assertions.assertEquals(entry.getValue(),
                                 TypeGuesser.guessTypeName(entry.getKey()).toString())));
+    }
+
+    @TestFactory
+    Stream<DynamicTest> classNameCannotGuess() {
+        return Stream.of(
+                "java.lang.Object[]",
+                "boolean",
+                "byte",
+                "short",
+                "long",
+                "char",
+                "float",
+                "double",
+                "int",
+                "boolean[]",
+                "byte[][]",
+                "short[][][]",
+                "long[][][][]",
+                "char[][][][][]",
+                "float[][][][][][]",
+                "double[][][][][][][]",
+                "int[][][][][][][][]",
+                "java.util.List<java.lang.Object>",
+                "java.util.List<? extends java.lang.Number>",
+                "java.util.List<?>",
+                "java.util.List<? super java.lang.Number>",
+                "java.util.List<? extends java.util.List<java.lang.Integer>>",
+                "java.util.List<? super java.util.List<java.lang.Integer>>",
+                "java.util.List<? extends java.util.List<? extends java.lang.Integer>>",
+                "java.util.List<? super java.util.List<? super java.lang.Integer>>",
+                "java.util.List<? extends java.util.List<? super java.lang.Integer>>",
+                "java.util.List<? super java.util.List<? extends java.lang.Integer>>",
+                "java.util.List<java.util.List<java.lang.Integer>>",
+                "java.util.Map<java.lang.String, java.lang.Object>")
+                .map(genericType -> DynamicTest.dynamicTest(
+                        String.format("ClassName.bestGuess does not support: %s", genericType),
+                        () -> Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> ClassName.bestGuess(genericType))));
     }
 
     @Test
