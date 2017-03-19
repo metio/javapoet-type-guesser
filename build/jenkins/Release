@@ -65,12 +65,12 @@ node {
                             --settings $MAVEN_SETTINGS \
                             --show-version \
                             --activate-profiles release \
-                            deploy \
-                            -Drevision=$(TIMESTAMP) \
-                            -Drelease=${releaseTarget} \
-                            -DskipLocalStaging=${skipLocalStaging} \
-                            -Dpgp.secretKey=keyfile:${PGP_KEY} \
-                            -Dpgp.passphrase=literal:'${PGP_PASSPHRASE}'
+                            --define revision=${TIMESTAMP} \
+                            --define release=${releaseTarget} \
+                            --define skipLocalStaging=${skipLocalStaging} \
+                            --define pgp.secretKey=keyfile:${PGP_KEY} \
+                            --define pgp.passphrase=literal:'${PGP_PASSPHRASE}'
+                            deploy
                     """
                 }
             }
