@@ -34,7 +34,7 @@ Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.u
 
 == Development Status
 
-All currently required features are implemented. This project is in maintenance mode. Take a look at the link:https://github.com/sebhoss/javapoet-type-guesser/issues[open tickets] for ways to help out or create a new ticket.
+All currently required features are implemented. This project is in maintenance mode. Take a look at the link:https://github.com/sebhoss/javapoet-type-guesser/issues[open tickets] for ways to help out or create a new ticket yourself.
 
 == Usage
 
