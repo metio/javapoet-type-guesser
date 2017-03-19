@@ -90,14 +90,6 @@ class TypeGuesserTest {
     Stream<DynamicTest> shouldIgnoreWhitespace() {
         return Stream.of(
                 new SimpleEntry<>(" java.lang.Object[] ", "java.lang.Object[]"),
-                new SimpleEntry<>("\0boolean", "boolean"),
-                new SimpleEntry<>("\0byte", "byte"),
-                new SimpleEntry<>("\0short", "short"),
-                new SimpleEntry<>("\0long", "long"),
-                new SimpleEntry<>("\0char", "char"),
-                new SimpleEntry<>("\0float", "float"),
-                new SimpleEntry<>("\0double", "double"),
-                new SimpleEntry<>("\0int", "int"),
                 new SimpleEntry<>(" java.util.List<java.lang.Object> ", "java.util.List<java.lang.Object>"),
                 new SimpleEntry<>(" java.util.List< java.lang.Object > ", "java.util.List<java.lang.Object>"),
                 new SimpleEntry<>(" java.util.List< ? > ", "java.util.List<?>"),
@@ -106,6 +98,23 @@ class TypeGuesserTest {
                 new SimpleEntry<>(" java.util.List < ? > ", "java.util.List<?>"))
                 .map(entry -> DynamicTest.dynamicTest(
                         String.format("should parse [ %s ] as: %s", entry.getKey(), entry.getValue()),
+                        () -> Assertions.assertEquals(entry.getValue(),
+                                TypeGuesser.guessTypeName(entry.getKey()).toString())));
+    }
+
+    @TestFactory
+    Stream<DynamicTest> shouldCoverSwitchStatement() {
+        return Stream.of(
+                new SimpleEntry<>("\0boolean", "boolean"),
+                new SimpleEntry<>("\0byte", "byte"),
+                new SimpleEntry<>("\0short", "short"),
+                new SimpleEntry<>("\0long", "long"),
+                new SimpleEntry<>("\0char", "char"),
+                new SimpleEntry<>("\0float", "float"),
+                new SimpleEntry<>("\0double", "double"),
+                new SimpleEntry<>("\0int", "int"))
+                .map(entry -> DynamicTest.dynamicTest(
+                        String.format("should parse : %s", entry.getValue()),
                         () -> Assertions.assertEquals(entry.getValue(),
                                 TypeGuesser.guessTypeName(entry.getKey()).toString())));
     }
