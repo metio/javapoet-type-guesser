@@ -54,8 +54,8 @@
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
   <!-- https://maven.apache.org/pom.html#Continuous_Integration_Management -->
   <ciManagement>
-    <system>Travis</system>
-    <url>https://travis-ci.org/sebhoss/javapoet-type-guesser</url>
+    <system>Jenkins</system>
+    <url>https://build.metio.wtf/job/sebhoss/job/javapoet-type-guesser/</url>
   </ciManagement>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
