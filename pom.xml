@@ -17,7 +17,7 @@
   <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
   <groupId>de.xn--ho-hia.javapoet</groupId>
   <artifactId>javapoet-type-guesser</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>${revision}</version>
   <packaging>jar</packaging>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
