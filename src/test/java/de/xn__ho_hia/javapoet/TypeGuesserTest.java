@@ -169,4 +169,10 @@ class TypeGuesserTest {
                 () -> TypeGuesser.guessType(null));
     }
 
+    @Test
+    void shouldThrowNPEforNullTypeName() {
+        Assertions.assertThrows(NullPointerException.class,
+                () -> TypeGuesser.guessTypeName(null));
+    }
+
 }
