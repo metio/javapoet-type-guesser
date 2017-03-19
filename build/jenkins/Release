@@ -65,7 +65,6 @@ node {
                             --settings $MAVEN_SETTINGS \
                             --show-version \
                             --activate-profiles release \
-                            --define revision=${timestamp} \
                             --define release=${releaseTarget} \
                             --define skipLocalStaging=${skipLocalStaging} \
                             --define pgp.secretKey=keyfile:${PGP_KEY} \
