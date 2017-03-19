@@ -11,22 +11,81 @@
     <version>2017.03.12-095554</version>
   </parent>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               COORDINATES                               -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
   <groupId>de.xn--ho-hia.javapoet</groupId>
-  <artifactId>javapoet-generic-type-support</artifactId>
+  <artifactId>javapoet-type-guesser</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>generic</name>
-  <description>adds generic type guessing support to JavaPoet</description>
-  <url>abc</url>
+  <packaging>jar</packaging>
 
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               INFORMATIONS                              -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#More_Project_Information -->
+  <name>TypeGuesser</name>
+  <description>Type guesser for JavaPoet</description>
+  <url>https://seb.xn--ho-hia.de/javapoet-type-guesser</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                    SCM                                  -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#SCM -->
+  <scm>
+    <connection>scm:git:git://github.com/sebhoss/javapoet-type-guesser.git</connection>
+    <developerConnection>scm:git:git@github.com:sebhoss/javapoet-type-guesser.git</developerConnection>
+    <tag>master</tag>
+    <url>https://github.com/sebhoss/javapoet-type-guesser</url>
+  </scm>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                             ISSUE MANAGEMENT                            -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Issue_Management -->
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/sebhoss/javapoet-type-guesser/issues</url>
+  </issueManagement>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               CI MANAGEMENT                             -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Continuous_Integration_Management -->
+  <ciManagement>
+    <system>Travis</system>
+    <url>https://travis-ci.org/sebhoss/javapoet-type-guesser</url>
+  </ciManagement>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                          DISTRIBUTION MANAGEMENT                        -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Distribution_Management -->
+  <distributionManagement>
+    <site>
+      <id>github</id>
+      <name>GitHub Pages</name>
+      <url>https://seb.xn--ho-hia.de/javapoet-type-guesser/</url>
+    </site>
+  </distributionManagement>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                PROPERTIES                               -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Properties -->
+  <properties>
+    <revision>9999.99.99-SNAPSHOT</revision>
+  </properties>
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                               DEPENDENCIES                              -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Dependencies -->
   <dependencies>
     <dependency>
       <groupId>com.squareup</groupId>
       <artifactId>javapoet</artifactId>
-    </dependency>
-    <dependency>
-  	  <groupId>org.junit.jupiter</groupId>
-	  <artifactId>junit-jupiter-api</artifactId>
-	  <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -34,16 +93,15 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.junit.vintage</groupId>
-      <artifactId>junit-vintage-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-runner</artifactId>
     </dependency>
   </dependencies>
-  
+
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!--                                   BUILD                                 -->
+  <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+  <!-- https://maven.apache.org/pom.html#Build -->
   <build>
     <plugins>
         <plugin>
