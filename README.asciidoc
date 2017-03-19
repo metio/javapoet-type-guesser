@@ -3,6 +3,7 @@ Sebastian Hoß <https://seb.hoß.de/[@sebhoss]>
 :github-org: sebhoss
 :project-name: javapoet-type-guesser
 :project-group: de.xn--ho-hia.javapoet
+:codacy-project: de2ceeb31af24554a23a65157fbab083
 :toc:
 :toc-placement: preamble
 
@@ -15,6 +16,7 @@ image:https://www.openhub.net/p/{project-name}/widgets/project_thin_badge.gif["O
 image:https://img.shields.io/jenkins/s/https/build.metio.wtf/job/{github-org}/job/{project-name}/job/{project-name}_verify.svg?style=flat-square["Build Status", link="https://build.metio.wtf/job/{github-org}/job/{project-name}/"]
 pass:[<span class="image"><a class="image" href="https://quality.metio.wtf/dashboard?id=de.xn--ho-hia.javapoet%3Ajavapoet-type-guesser"><img src="https://img.shields.io/sonar/https/quality.metio.wtf/de.xn--ho-hia.javapoet:javapoet-type-guesser/coverage.svg?style=flat-square" alt="Code Coverage"></a></span>]
 pass:[<span class="image"><a class="image" href="https://quality.metio.wtf/dashboard?id=de.xn--ho-hia.javapoet%3Ajavapoet-type-guesser"><img src="https://img.shields.io/sonar/https/quality.metio.wtf/de.xn--ho-hia.javapoet:javapoet-type-guesser/tech_debt.svg?style=flat-square" alt="Technical Debt"></a></span>]
+image:https://img.shields.io/codacy/grade/{codacy-project}.svg?style=flat-square["Codacy Code Quality", link="https://www.codacy.com/app/mail_7/{project-name}"]
 image:https://img.shields.io/badge/forkable-yes-brightgreen.svg?style=flat-square["Can this project be forked?", link="https://basicallydan.github.io/forkability/?u={github-org}&r={project-name}"]
 image:https://img.shields.io/maintenance/yes/2017.svg?style=flat-square["Is this thing still maintained?"]
 image:https://img.shields.io/bountysource/team/metio/activity.svg?style=flat-square["Bounties on open tickets", link="https://www.bountysource.com/teams/metio"]
