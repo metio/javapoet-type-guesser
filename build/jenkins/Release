@@ -68,7 +68,7 @@ node {
                             --define release=${releaseTarget} \
                             --define skipLocalStaging=${skipLocalStaging} \
                             --define pgp.secretKey=keyfile:${PGP_KEY} \
-                            --define pgp.passphrase=literal:'${PGP_PASSPHRASE}'
+                            --define pgp.passphrase=literal:'${PGP_PASSPHRASE}' \
                             deploy
                     """
                 }
