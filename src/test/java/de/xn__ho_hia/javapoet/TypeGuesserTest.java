@@ -90,7 +90,14 @@ class TypeGuesserTest {
     Stream<DynamicTest> shouldIgnoreWhitespace() {
         return Stream.of(
                 new SimpleEntry<>(" java.lang.Object[] ", "java.lang.Object[]"),
-                new SimpleEntry<>(" java.lang.Object [] ", "java.lang.Object[]"),
+                new SimpleEntry<>("\0boolean", "boolean"),
+                new SimpleEntry<>("\0byte", "byte"),
+                new SimpleEntry<>("\0short", "short"),
+                new SimpleEntry<>("\0long", "long"),
+                new SimpleEntry<>("\0char", "char"),
+                new SimpleEntry<>("\0float", "float"),
+                new SimpleEntry<>("\0double", "double"),
+                new SimpleEntry<>("\0int", "int"),
                 new SimpleEntry<>(" java.util.List<java.lang.Object> ", "java.util.List<java.lang.Object>"),
                 new SimpleEntry<>(" java.util.List< java.lang.Object > ", "java.util.List<java.lang.Object>"),
                 new SimpleEntry<>(" java.util.List< ? > ", "java.util.List<?>"),
