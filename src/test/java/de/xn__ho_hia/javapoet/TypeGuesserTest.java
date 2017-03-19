@@ -170,9 +170,21 @@ class TypeGuesserTest {
     }
 
     @Test
+    void shouldThrowIAEforEmptyType() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> TypeGuesser.guessType(""));
+    }
+
+    @Test
     void shouldThrowNPEforNullTypeName() {
         Assertions.assertThrows(NullPointerException.class,
                 () -> TypeGuesser.guessTypeName(null));
+    }
+
+    @Test
+    void shouldThrowIAEforEmptyTypeName() {
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> TypeGuesser.guessTypeName(""));
     }
 
 }
