@@ -76,6 +76,11 @@
   <!-- https://maven.apache.org/pom.html#Properties -->
   <properties>
     <revision>9999.99.99-SNAPSHOT</revision>
+
+    <!-- reduced to zero because of missing JUnit5 support in PIT -->
+    <!-- https://github.com/hcoles/pitest/issues/284 -->
+    <pit.skip>true</pit.skip>
+    <pit.mutationCoverage>0</pit.mutationCoverage>
   </properties>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
