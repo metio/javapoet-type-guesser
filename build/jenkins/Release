@@ -64,6 +64,7 @@ node {
                         mvn --batch-mode \
                             --settings $MAVEN_SETTINGS \
                             --show-version \
+                            -e \
                             pgp:sign deploy \
                             -Drelease=${releaseTarget} \
                             -DskipLocalStaging=${skipLocalStaging} \
