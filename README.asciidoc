@@ -1,6 +1,6 @@
-= JavaPoet TypeGuesser
+= JavaPoet TypeGuesser image:https://img.shields.io/badge/email-%40metio-brightgreen.svg?style=social&label=mail["Discuss on Google Groups", link="https://groups.google.com/forum/#!forum/metio"] image:https://img.shields.io/badge/irc-%23metio.wtf-brightgreen.svg?style=social&label=IRC["Chat on IRC", link="http://webchat.freenode.net/?channels=metio.wtf"]
 
-Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.util.List<java.lang.Integer>")`? This project provides an extension to link:https://github.com/square/javapoet[JavaPoet] that allows you to do that. Simply replace the call to `ClassName.bestGuess(String)` with a call to `TypeGuesser.guessTypeName(String)`.
+Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.util.List<java.lang.Integer>")`? This project provides an extension to link:https://github.com/square/javapoet[JavaPoet] that allows you to do that. Simply replace the call to `ClassName.bestGuess(String)` with a call to `TypeGuesser.guessTypeName(String)` which is able to parse everything that `ClassName` can and additionally is fine with primitives, generics, wildcards and arrays.
 
 == License
 
