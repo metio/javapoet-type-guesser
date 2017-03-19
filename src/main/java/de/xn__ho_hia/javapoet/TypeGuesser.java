@@ -120,7 +120,7 @@ public final class TypeGuesser {
     private static TypeName[] guessGenericTypeArguments(final String genericPart) {
         final List<TypeName> types = new ArrayList<>();
         String inputToParse = genericPart;
-        while (inputToParse != null && !inputToParse.isEmpty()) {
+        while (!inputToParse.isEmpty()) {
             final int indexOfComma = inputToParse.indexOf(COMMA);
             final int indexOfAngel = inputToParse.indexOf(OPEN_ANGLE_BRACKET);
 
