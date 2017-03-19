@@ -8,7 +8,7 @@
   <parent>
     <groupId>de.xn--ho-hia.maven.parents</groupId>
     <artifactId>maven-parents-java-stable</artifactId>
-    <version>2017.03.12-095554</version>
+    <version>9999.99.99-SNAPSHOT</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -94,7 +94,7 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
+      <artifactId>junit-jupiter-api</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
