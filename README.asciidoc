@@ -23,6 +23,7 @@ Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.u
 
 == Features
 
+* Guess everything that `ClassName` can guess
 * Guess primitives
 * Guess generic types
 * Support for wildcards
