@@ -141,8 +141,23 @@ public final class TypeGuesser {
     }
 
     private static boolean firstBeforeSecond(final int first, final int second) {
-        return first >= 0 && second >= 0 && first < second
-                || first >= 0 && !firstBeforeSecond(second, first);
+        return isFirst(first, second) || isOnly(first, second);
+    }
+
+    private static boolean isFirst(final int first, final int second) {
+        return exists(first, second) && first < second;
+    }
+
+    private static boolean isOnly(final int first, final int second) {
+        return exists(first) && !firstBeforeSecond(second, first);
+    }
+
+    private static boolean exists(final int first, final int second) {
+        return exists(first) && exists(second);
+    }
+
+    private static boolean exists(final int index) {
+        return index >= 0;
     }
 
     private static int calculateEndIndexOfGenericType(final String inputToParse) {
