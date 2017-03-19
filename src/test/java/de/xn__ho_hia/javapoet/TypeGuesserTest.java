@@ -73,6 +73,8 @@ class TypeGuesserTest {
         return Stream.of(
                 "java.lang.Object[]]",
                 "java.util.List<java.lang.Object",
+                "java.util.List<java.util.List<java.lang.Object>",
+                "java.util.List<java.util.List<java.util.List<java.lang.Object>>",
                 "java.lang.Object[][]]")
                 .map(genericType -> DynamicTest.dynamicTest(String.format("should throw for: %s", genericType),
                         () -> Assertions.assertThrows(IllegalArgumentException.class,
