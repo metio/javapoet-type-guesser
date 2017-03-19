@@ -30,6 +30,10 @@ public final class TypeGuesser {
     private static final String EXTENDS                = "extends";
     private static final String SUPER                  = "super";
 
+    private TypeGuesser() {
+        // utility class, call #guessTypeName() directly
+    }
+
     /**
      * A replacement for {@link ClassName#bestGuess(String)} that adds support for various new types.
      *
@@ -144,6 +148,7 @@ public final class TypeGuesser {
     private static int calculateEndIndexOfGenericType(final String inputToParse) {
         int countOfOpenAngels = 0;
         int countOfClosingAngels = 0;
+        int endIndex = inputToParse.length();
         for (int index = 0; index < inputToParse.length(); index++) {
             if (inputToParse.codePointAt(index) == OPEN_ANGLE_BRACKET.charAt(0)) {
                 countOfOpenAngels++;
@@ -151,11 +156,12 @@ public final class TypeGuesser {
             if (inputToParse.codePointAt(index) == CLOSING_ANGLE_BRACKET.charAt(0)) {
                 countOfClosingAngels++;
                 if (countOfOpenAngels == countOfClosingAngels) {
-                    return index + 1;
+                    endIndex = index + 1;
+                    break;
                 }
             }
         }
-        return inputToParse.length();
+        return endIndex;
     }
 
 }

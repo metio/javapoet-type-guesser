@@ -6,19 +6,21 @@
  */
 package de.xn__ho_hia.javapoet;
 
+import java.lang.reflect.Constructor;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
+@SuppressWarnings({ "nls", "static-method" })
 class TypeGuesserTest {
 
     @TestFactory
-    @SuppressWarnings({ "nls", "static-method" })
     Stream<DynamicTest> shouldParseValidTypes() {
         return Stream.of(
                 "java.lang.Object",
@@ -63,6 +65,39 @@ class TypeGuesserTest {
                 .map(genericType -> DynamicTest.dynamicTest(String.format("should parse: %s", genericType),
                         () -> Assertions.assertEquals(genericType,
                                 TypeGuesser.guessTypeName(genericType).toString())));
+    }
+
+    @TestFactory
+    Stream<DynamicTest> shouldThrowForInvalidTypes() {
+        return Stream.of(
+                "java.lang.Object[]]",
+                "java.util.List<java.lang.Object",
+                "java.lang.Object[][]]")
+                .map(genericType -> DynamicTest.dynamicTest(String.format("should throw for: %s", genericType),
+                        () -> Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> TypeGuesser.guessTypeName(genericType))));
+    }
+
+    @Test
+    void shouldNotBeInvocable() {
+        final Class<?> clazz = TypeGuesser.class;
+
+        final Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+
+        for (final Constructor<?> constructor : constructors) {
+            Assertions.assertFalse(constructor.isAccessible());
+        }
+    }
+
+    @Test
+    public void shouldBeInvocableViaReflection() throws Exception {
+        final Class<?> clazz = TypeGuesser.class;
+        final Constructor<?> constructor = clazz.getDeclaredConstructors()[0];
+
+        constructor.setAccessible(true);
+        final Object instance = constructor.newInstance((Object[]) null);
+
+        Assertions.assertNotNull(instance);
     }
 
 }
