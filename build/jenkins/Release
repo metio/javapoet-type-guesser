@@ -64,8 +64,9 @@ node {
                         mvn --batch-mode \
                             --settings $MAVEN_SETTINGS \
                             --show-version \
-                            -e \
-                            pgp:sign deploy \
+                            --activate-profiles release \
+                            deploy \
+                            -Drevision=$(TIMESTAMP) \
                             -Drelease=${releaseTarget} \
                             -DskipLocalStaging=${skipLocalStaging} \
                             -Dpgp.secretKey=keyfile:${PGP_KEY} \
