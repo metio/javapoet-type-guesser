@@ -105,18 +105,17 @@ class TypeGuesserTest {
     @TestFactory
     Stream<DynamicTest> shouldCoverSwitchStatement() {
         return Stream.of(
-                new SimpleEntry<>("\0boolean", "boolean"),
-                new SimpleEntry<>("\0byte", "byte"),
-                new SimpleEntry<>("\0short", "short"),
-                new SimpleEntry<>("\0long", "long"),
-                new SimpleEntry<>("\0char", "char"),
-                new SimpleEntry<>("\0float", "float"),
-                new SimpleEntry<>("\0double", "double"),
-                new SimpleEntry<>("\0int", "int"))
-                .map(entry -> DynamicTest.dynamicTest(
-                        String.format("should parse : %s", entry.getValue()),
-                        () -> Assertions.assertEquals(entry.getValue(),
-                                TypeGuesser.guessTypeName(entry.getKey()).toString())));
+                "\0boolean",
+                "\0byte",
+                "\0short",
+                "\0long",
+                "\0char",
+                "\0float",
+                "\0double",
+                "\0int")
+                .map(type -> DynamicTest.dynamicTest("should cover switch statement",
+                        () -> Assertions.assertThrows(IllegalArgumentException.class,
+                                () -> TypeGuesser.guessType(type))));
     }
 
     @TestFactory
