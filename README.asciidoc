@@ -22,7 +22,7 @@ image:https://img.shields.io/badge/forkable-yes-brightgreen.svg?style=flat-squar
 image:https://img.shields.io/maintenance/yes/2017.svg?style=flat-square["Is this thing still maintained?"]
 image:https://img.shields.io/bountysource/team/metio/activity.svg?style=flat-square["Bounties on open tickets", link="https://www.bountysource.com/teams/metio"]
 
-Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.util.List<java.lang.Integer>")`? This project provides an extension to link:https://github.com/square/javapoet[JavaPoet] that allows you to do that. Simply replace the call to `ClassName.bestGuess(String)` with a call to `TypeGuesser.guessTypeName(String)` which is able to parse everything that `ClassName` can and additionally is fine with primitives, generics, wildcards and arrays.
+Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.util.List<java.lang.Integer>")`? This project provides an extension to link:https://github.com/square/javapoet[JavaPoet] that allows you to do just that. Simply replace the call to `ClassName.bestGuess(String)` with a call to `TypeGuesser.guessTypeName(String)` which is able to parse everything that `ClassName` can and additionally is fine with primitives, generics, wildcards and arrays.
 
 == Features
 
@@ -34,7 +34,7 @@ Ever wanted to call `ClassName.bestGuess("int")` or `ClassName.bestGuess("java.u
 
 == Development Status
 
-All currently required features are implemented. This project is in maintenance mode.
+All currently required features are implemented. This project is in maintenance mode. Take a look at the link:https://github.com/sebhoss/javapoet-type-guesser/issues[open tickets] for ways to help out.
 
 == Usage
 
@@ -62,7 +62,7 @@ To use this project just declare the following dependency inside your POM:
 </dependency>
 ----
 
-Replace `${version.javapoet-type-guesser}` with the link:++http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.javapoet%20a%3Ajavapoet-type-guesser++[latest release]. This project is continuously deployed and uses a date based versioning approach. I vow not to break any of its API ever, thus it is safe to use an open version range like this `(1.0.0,)` as a replacement for `${version.javapoet-type-guesser}`.
+Replace `${version.javapoet-type-guesser}` with the link:++http://search.maven.org/#search%7Cga%7C1%7Cg%3Ade.xn--ho-hia.javapoet%20a%3Ajavapoet-type-guesser++[latest release]. This project is continuously deployed and uses a date based versioning approach. I vow not to break any of its API ever, thus it is safe to use an open version range like `(1.0.0,)` as a replacement for `${version.javapoet-type-guesser}`.
 
 === Compatibility
 
