@@ -32,7 +32,7 @@ node {
         }
     }
 
-   stage('Analyze') {
+   stage('Verify') {
         withSonarQubeEnv('quality.metio.wtf') {
             withMaven(
                     maven: "${mavenVersion}",
@@ -42,12 +42,7 @@ node {
                     mvn --batch-mode \
                         --show-version \
                         --activate-profiles online \
-                        install
-                """
-                sh """
-                    mvn --batch-mode \
-                        --show-version \
-                        sonar:sonar
+                        verify
                 """
             }
         }
