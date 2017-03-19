@@ -8,7 +8,7 @@
   <parent>
     <groupId>de.xn--ho-hia.maven.parents</groupId>
     <artifactId>maven-parents-java-stable</artifactId>
-    <version>9999.99.99-SNAPSHOT</version>
+    <version>2017.03.19-175304</version>
   </parent>
 
   <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
