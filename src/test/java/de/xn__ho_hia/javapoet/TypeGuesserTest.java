@@ -75,6 +75,8 @@ class TypeGuesserTest {
                 "java.util.List<java.lang.Object",
                 "java.util.List<java.util.List<java.lang.Object>",
                 "java.util.List<java.util.List<java.util.List<java.lang.Object>>",
+                "java.util.List<? extends java.util.List<? super int>>",
+                "java.util.List<? super java.util.List<? extends char>>",
                 "java.lang.Object[][]]")
                 .map(genericType -> DynamicTest.dynamicTest(String.format("should throw for: %s", genericType),
                         () -> Assertions.assertThrows(IllegalArgumentException.class,
