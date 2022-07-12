@@ -1,0 +1,10 @@
+<component name="CopyrightManager">
+  <settings default="javapoet-type-guesser">
+    <module2copyright>
+      <element module="Project Files" copyright="javapoet-type-guesser" />
+    </module2copyright>
+    <LanguageOptions name="JAVA">
+      <option name="addBlankBefore" value="true" />
+    </LanguageOptions>
+  </settings>
+</component>
