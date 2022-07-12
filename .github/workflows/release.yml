@@ -1,0 +1,103 @@
+name: Automated Release
+on:
+  schedule:
+    - cron: 45 3 * * THU
+  workflow_dispatch:
+env:
+  JAVA_VERSION: 17
+  JAVA_PACKAGE: jdk
+  JAVA_ARCH: x64
+  JAVA_DISTRO: temurin
+jobs:
+  prepare:
+    name: Prepare Release
+    runs-on: ubuntu-latest
+    outputs:
+      commit_count: ${{ steps.commits.outputs.count }}
+      release_version: ${{ steps.release.outputs.version }}
+      previous_version: ${{ steps.previous.outputs.version }}
+    steps:
+      - id: checkout
+        name: Clone Git Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - id: commits
+        name: Count Commits
+        run: echo "::set-output name=count::$(git rev-list --count HEAD --since='last Thursday' -- src)"
+      - id: release
+        name: Create Release Version
+        if: steps.commits.outputs.count > 0
+        run: echo "::set-output name=version::$(date +'%Y.%-m.%-d')"
+      - id: previous
+        name: Get Last Release
+        if: steps.commits.outputs.count > 0
+        run: echo "::set-output name=version::$(git describe --abbrev=0 --tags)"
+  build:
+    name: Build Project
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Clone Git Repository
+        uses: actions/checkout@v3
+        if: needs.prepare.outputs.commit_count > 0
+      - id: java
+        name: Setup Java
+        uses: actions/setup-java@v3
+        if: needs.prepare.outputs.commit_count > 0
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          java-package: ${{ env.JAVA_PACKAGE }}
+          architecture: ${{ env.JAVA_ARCH }}
+          distribution: ${{ env.JAVA_DISTRO }}
+          server-id: ossrh
+          server-username: MAVEN_CENTRAL_USERNAME
+          server-password: MAVEN_CENTRAL_TOKEN
+      - id: cache
+        name: Cache Maven Repository
+        uses: actions/cache@v3
+        if: needs.prepare.outputs.commit_count > 0
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - id: gpg
+        name: GPG Key
+        if: needs.prepare.outputs.commit_count > 0
+        uses: timheuer/base64-to-file@v1.1
+        with:
+          fileName: signing.key.asc
+          fileDir: ${{ github.workspace}}
+          encodedString: ${{ secrets.GPG_SECRET_KEY_BASE64 }}
+      - id: deploy-maven-tooling
+        name: Deploy Maven Tooling
+        run: MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED" mvn --batch-mode --activate-profiles release --define revision=${{ needs.prepare.outputs.release_version }} install deploy --define pgp.secretkey=keyfile:signing.key.asc --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        if: needs.prepare.outputs.commit_count > 0
+        env:
+          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
+  release:
+    name: GitHub Release
+    needs: [prepare, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - id: checkout
+        name: Clone Git Repository
+        if: needs.prepare.outputs.commit_count > 0
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - id: create_release
+        name: Create Release
+        if: needs.prepare.outputs.commit_count > 0
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.prepare.outputs.release_version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
