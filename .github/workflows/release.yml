@@ -71,8 +71,8 @@ jobs:
           fileName: signing.key.asc
           fileDir: ${{ github.workspace}}
           encodedString: ${{ secrets.GPG_SECRET_KEY_BASE64 }}
-      - id: deploy-maven-tooling
-        name: Deploy Maven Tooling
+      - id: deploy-maven
+        name: Deploy Maven Artifact
         run: MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED" mvn --batch-mode --activate-profiles release --define revision=${{ needs.prepare.outputs.release_version }} install deploy --define pgp.secretkey=keyfile:signing.key.asc --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         if: needs.prepare.outputs.commit_count > 0
         env:
