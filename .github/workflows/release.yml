@@ -16,6 +16,7 @@ jobs:
       commit_count: ${{ steps.commits.outputs.count }}
       release_version: ${{ steps.release.outputs.version }}
       previous_version: ${{ steps.previous.outputs.version }}
+      last_sha: ${{ steps.sha.outputs.sha }}
     steps:
       - id: checkout
         name: Clone Git Repository
@@ -33,6 +34,10 @@ jobs:
         name: Get Last Release
         if: steps.commits.outputs.count > 0
         run: echo "::set-output name=version::$(git describe --abbrev=0 --tags)"
+      - id: sha
+        name: Last Commit
+        if: steps.commits.outputs.count > 0
+        run: echo "::set-output name=sha::$(git rev-parse HEAD)"
   build:
     name: Build Project
     needs: prepare
@@ -73,11 +78,19 @@ jobs:
           encodedString: ${{ secrets.GPG_SECRET_KEY_BASE64 }}
       - id: deploy-maven
         name: Deploy Maven Artifact
-        run: MAVEN_OPTS="--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED" mvn --batch-mode --activate-profiles release --define revision=${{ needs.prepare.outputs.release_version }} install deploy --define pgp.secretkey=keyfile:signing.key.asc --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+        run: |
+          mvn install deploy \
+            --batch-mode \
+            --activate-profiles release \
+            --define revision=${{ needs.prepare.outputs.release_version }} \
+            --define scmTag=${{ needs.prepare.outputs.last_sha }} \
+            --define pgp.secretkey=keyfile:signing.key.asc \
+            --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         if: needs.prepare.outputs.commit_count > 0
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
+          MAVEN_OPTS: "--add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/java.awt.font=ALL-UNNAMED"
   release:
     name: GitHub Release
     needs: [prepare, build]

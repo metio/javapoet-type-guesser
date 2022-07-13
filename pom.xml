@@ -42,11 +42,11 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                                    SCM                                  -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
-    <!-- https://maven.apache.org/pom.html#SCM -->
+    <!-- https://maven.apache.org/pom.html#scm -->
     <scm>
         <connection>scm:git:git://github.com/metio/javapoet-type-guesser.git</connection>
         <developerConnection>scm:git:git@github.com:metio/javapoet-type-guesser.git</developerConnection>
-        <tag>HEAD</tag>
+        <tag>${scmTag}</tag>
         <url>https://github.com/metio/javapoet-type-guesser</url>
     </scm>
 
@@ -67,6 +67,7 @@
         <revision>0.0.0-SNAPSHOT</revision>
         <version.jdk>17</version.jdk>
         <project.build.outputTimestamp>2017</project.build.outputTimestamp>
+        <scmTag>HEAD</scmTag>
     </properties>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -95,5 +96,22 @@
             <artifactId>javapoet</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-artifact-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>buildinfo</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
