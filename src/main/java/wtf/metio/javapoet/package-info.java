@@ -5,4 +5,7 @@
  * in the LICENSE file.
  */
 
+/**
+ * JavaPoet extension to guess more types.
+ */
 package wtf.metio.javapoet;
