@@ -79,7 +79,7 @@ jobs:
       - id: deploy-maven
         name: Deploy Maven Artifact
         run: |
-          mvn install deploy \
+          mvn deploy \
             --batch-mode \
             --activate-profiles release \
             --define revision=${{ needs.prepare.outputs.release_version }} \
