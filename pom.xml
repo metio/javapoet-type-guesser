@@ -25,7 +25,7 @@
     <!--                               COORDINATES                               -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
-    <groupId>wtf.metio.yosql</groupId>
+    <groupId>wtf.metio.javapoet</groupId>
     <artifactId>javapoet-type-guesser</artifactId>
     <version>${revision}</version>
     <packaging>jar</packaging>
