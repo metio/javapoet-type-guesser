@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: The javapoet-type-guesser Authors
+SPDX-License-Identifier: 0BSD
+ -->
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge

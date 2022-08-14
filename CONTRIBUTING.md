@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: The javapoet-type-guesser Authors
+SPDX-License-Identifier: 0BSD
+ -->
+
 # Contributor Guide
 
 Thank you so much for helping out! This project uses a [DCO](https://developercertificate.org/) to verify that each change is acceptable. Its text is as follows:

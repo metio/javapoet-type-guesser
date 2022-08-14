@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: The javapoet-type-guesser Authors
+# SPDX-License-Identifier: 0BSD
+
+name: Qodana Scan
+on:
+  workflow_dispatch:
+jobs:
+  qodana:
+    name: Qodana
+    runs-on: ubuntu-latest
+    steps:
+      - id: checkout
+        name: Clone Git Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - id: qodana
+        name: Qodana Scan
+        uses: JetBrains/qodana-action@v2022.2.1
