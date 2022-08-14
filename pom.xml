@@ -38,6 +38,19 @@
     <inceptionYear>2017</inceptionYear>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!--                                 LICENSE                                 -->
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+    <!-- https://maven.apache.org/pom.html#licenses -->
+    <licenses>
+        <license>
+            <name>BSD Zero Clause License</name>
+            <url>https://spdx.org/licenses/0BSD.html</url>
+            <distribution>repo</distribution>
+            <comments>https://spdx.org/licenses/0BSD.html</comments>
+        </license>
+    </licenses>
+
+    <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!--                                    SCM                                  -->
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!-- https://maven.apache.org/pom.html#scm -->
@@ -76,7 +89,7 @@
         <site>
             <id>metio</id>
             <name>official website</name>
-            <url>https://javapoet-type-guesser.projects.metio.wtf</url>
+            <url>https://github.com/metio/javapoet-type-guesser</url>
         </site>
         <snapshotRepository>
             <id>ossrh</id>
