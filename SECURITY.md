@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: The javapoet-type-guesser Authors
+SPDX-License-Identifier: 0BSD
+ -->
+
 # Security Policy
 
 This project is using a continuous delivery mode and therefore only supports the latest released version.

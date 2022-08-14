@@ -1,20 +1,22 @@
+# SPDX-FileCopyrightText: The javapoet-type-guesser Authors
+# SPDX-License-Identifier: 0BSD
+
 name: CodeQL
 on:
   push:
     branches: [ main ]
-    paths:
-      - src/**
+  pull_request:
+    branches: [ main ]
   schedule:
-    - cron: 44 20 * * 6
-env:
-  JAVA_VERSION: 17
-  JAVA_PACKAGE: jdk
-  JAVA_ARCH: x64
-  JAVA_DISTRO: temurin
+    - cron: 42 3 * * 5
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     strategy:
       fail-fast: false
       matrix:
@@ -22,19 +24,6 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    - name: Set up Java
-      uses: actions/setup-java@v3
-      with:
-        java-version: ${{ env.JAVA_VERSION }}
-        java-package: ${{ env.JAVA_PACKAGE }}
-        architecture: ${{ env.JAVA_ARCH }}
-        distribution: ${{ env.JAVA_DISTRO }}
-    - uses: actions/cache@v3
-      with:
-        path: ~/.m2/repository
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
