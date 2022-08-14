@@ -24,6 +24,20 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: 17
+        java-package: jdk
+        architecture: x64
+        distribution: temurin
+    - name: Cache Maven Artifacts
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
