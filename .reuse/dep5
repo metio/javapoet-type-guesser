@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: javapoet-type-guesser
+Upstream-Contact: Sebastian Hoß <seb@hoß.de>
+Source: https://github.com/metio/javapoet-type-guesser
+
+Files: .idea/*
+Copyright: The javapoet-type-guesser Authors
+License: 0BSD
