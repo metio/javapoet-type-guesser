@@ -15,14 +15,8 @@ on:
       - .github/workflows/verify.yml
       - pom.xml
       - src/**
-env:
-  JAVA_VERSION: 17
-  JAVA_PACKAGE: jdk
-  JAVA_ARCH: x64
-  JAVA_DISTRO: temurin
 jobs:
-  build:
-    name: Build Project
+  verify:
     runs-on: ubuntu-latest
     steps:
       - id: checkout
@@ -32,10 +26,10 @@ jobs:
         name: Setup Java
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ env.JAVA_VERSION }}
-          java-package: ${{ env.JAVA_PACKAGE }}
-          architecture: ${{ env.JAVA_ARCH }}
-          distribution: ${{ env.JAVA_DISTRO }}
+          java-version: 17
+          java-package: jdk
+          architecture: x64
+          distribution: temurin
       - id: cache
         name: Cache Maven Repository
         uses: actions/cache@v3
