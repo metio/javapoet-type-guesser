@@ -6,7 +6,7 @@ on:
   schedule:
     - cron: 0 1 4 * *
 jobs:
-  build:
+  parent:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

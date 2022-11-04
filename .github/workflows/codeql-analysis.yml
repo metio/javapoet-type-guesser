@@ -6,8 +6,7 @@ on:
   schedule:
     - cron: 42 3 * * 4
 jobs:
-  analyze:
-    name: Analyze
+  codeql:
     runs-on: ubuntu-latest
     permissions:
       actions: read
