@@ -25,7 +25,7 @@
     <!-- https://maven.apache.org/pom.html#Maven_Coordinates -->
     <groupId>wtf.metio.javapoet</groupId>
     <artifactId>javapoet-type-guesser</artifactId>
-    <version>${revision}</version>
+    <version>0.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
@@ -75,7 +75,6 @@
     <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
     <!-- https://maven.apache.org/pom.html#Properties -->
     <properties>
-        <revision>0.0.0-SNAPSHOT</revision>
         <version.jdk>${javaVersion}</version.jdk>
         <scmTag>HEAD</scmTag>
     </properties>
