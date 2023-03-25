@@ -12,6 +12,11 @@ authors:
 url: https://github.com/metio/javapoet-type-guesser
 license: 0BSD
 keywords:
+  - arrays
+  - generics
   - java
+  - javapoet
   - make
   - maven
+  - primitives
+  - wildcards
