@@ -3,33 +3,14 @@
 
 name: Verify Commits
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - id: checkout
-        name: Clone Git Repository
-        uses: actions/checkout@v3
-      - id: java
-        name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          java-package: jdk
-          architecture: x64
-          distribution: temurin
-      - id: cache
-        name: Cache Maven Repository
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - id: maven
-        name: Maven Verify
+      - name: Clone Git Repository
+        uses: actions/checkout@v4
+      - uses: ./.github/actions/managed-java
+      - name: Build with Maven
         run: mvn --batch-mode verify

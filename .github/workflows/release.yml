@@ -4,7 +4,7 @@
 name: Automated Release
 on:
   schedule:
-    - cron: 45 3 * * THU
+    - cron: 35 3 * * TUE
   workflow_dispatch:
 jobs:
   publish:
@@ -14,10 +14,17 @@ jobs:
     steps:
       - id: checkout
         name: Clone Git Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: last_release
+        name: Fetch last release info
+        run: echo "tag=$(gh release view --json tagName --jq '.tagName')" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - id: commits
         name: Count Commits
-        run: echo "count=$(git rev-list --count HEAD --since='last week')" >> $GITHUB_OUTPUT
+        run: echo "count=$(git rev-list --count ${{ steps.last_release.outputs.tag }}..HEAD -- src/main/java pom.xml)" >> $GITHUB_OUTPUT
       - id: release
         name: Create Release Version
         if: steps.commits.outputs.count > 0
@@ -31,49 +38,32 @@ jobs:
         if: steps.commits.outputs.count > 0
         run: echo "iso8601=$(date --utc --iso-8601=seconds)" >> $GITHUB_OUTPUT
       - id: setup-java
-        name: Set up Java
+        uses: ./.github/actions/managed-maven
         if: steps.commits.outputs.count > 0
-        uses: actions/setup-java@v3
-        with:
-          java-version: 17
-          java-package: jdk
-          architecture: x64
-          distribution: temurin
-          server-id: ossrh
-          server-username: MAVEN_CENTRAL_USERNAME
-          server-password: MAVEN_CENTRAL_TOKEN
-      - id: cache
-        name: Cache Dependencies
-        if: steps.commits.outputs.count > 0
-        uses: actions/cache@v3
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - name: Set release version
-        if: steps.commits.outputs.count > 0
-        run: mvn --batch-mode --define newVersion=${{ steps.release.outputs.version }} --define generateBackupPoms=false versions:set
       - id: gpg
         name: GPG Key
         if: steps.commits.outputs.count > 0
-        uses: timheuer/base64-to-file@v1.2
+        uses: timheuer/base64-to-file@v1
         with:
           fileName: signing.key.asc
-          fileDir: ${{ github.workspace}}
+          fileDir: ${{ github.workspace }}
           encodedString: ${{ secrets.GPG_SECRET_KEY_BASE64 }}
+      - id: pom-version
+        name: Set Release Version
+        if: steps.commits.outputs.count > 0
+        run: mvn --batch-mode --define newVersion=${{ steps.release.outputs.version }} --define generateBackupPoms=false versions:set
       - id: deploy-maven
         name: Deploy Maven Artifact
         if: steps.commits.outputs.count > 0
-        run: |
-          mvn \
-            --batch-mode \
-            --activate-profiles release \
-            --define scmTag=${{ steps.sha.outputs.sha }} \
-            --define pgp.secretkey=keyfile:signing.key.asc \
-            --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }} \
-            --define project.build.outputTimestamp=${{ steps.timestamp.outputs.iso8601 }} \
-            deploy
+        run: >
+          mvn
+          --batch-mode
+          --activate-profiles release
+          --define scmTag=${{ steps.sha.outputs.sha }}
+          --define pgp.secretkey=keyfile:${{ steps.gpg.outputs.filePath }}
+          --define pgp.passphrase=literal:${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+          --define project.build.outputTimestamp=${{ steps.timestamp.outputs.iso8601 }}
+          deploy
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}

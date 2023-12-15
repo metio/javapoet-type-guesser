@@ -11,7 +11,7 @@ Simply replace the call to `ClassName.bestGuess(String)` with a call to `TypeGue
 able to parse everything that `ClassName` can and additionally is fine with primitives, generics, wildcards and
 arrays.
 
-Available in [Maven Central](https://search.maven.org/artifact/wtf.metio.javapoet/javapoet-type-guesser)
+Available in [Maven Central](https://central.sonatype.com/artifact/wtf.metio.javapoet/javapoet-type-guesser)
 
 ## License
 
