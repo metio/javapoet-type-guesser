@@ -1,0 +1,4 @@
+;; SPDX-FileCopyrightText: The javapoet-type-guesser Authors
+;; SPDX-License-Identifier: 0BSD
+
+{:packages ["@jdk17" "@maven"]}
