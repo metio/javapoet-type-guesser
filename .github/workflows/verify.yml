@@ -12,7 +12,7 @@ permissions:
 jobs:
   maven:
     name: Maven
-    uses: metio/ci/.github/workflows/maven.yml@d4a165ac035d1fa1a7aee5b27192d0aed9c7a0b0 # 2026.11.1111906
+    uses: metio/ci/.github/workflows/maven.yml@af972ee6dd2e9f1977cb4de00247d2a29f175c76 # 2026.11.2145519
   reuse:
     name: reuse
     runs-on: ubuntu-latest
